@@ -11,12 +11,12 @@
 
 #dependencies
   library(tidyverse)
+  library(fs)
+  library(here)
 
-#input
-  folderpath <- "~/GitHub/TrainingDataset/"
 
 #import new geography data
-  got_geo <- read_csv(file.path(folderpath, "got_geo.csv")) 
+  got_geo <- read_csv(here("Input", "got_geo.csv")) 
 
 #import fact view
   df_mer <- read_rds(Sys.glob("~/ICPI/Data/ICPI_FactView_PSNU_IM_*.Rds"))
@@ -42,7 +42,8 @@
   got_map <- bind_cols(got_geo, cohort)
     rm(cohort, got_geo)
   #export for documentation 
-    write_csv(got_map, file.path(folderpath,"got_map.csv"))
+    dir_create("Output")
+    write_csv(got_map, here("Input","got_map.csv"))
 
 #bind the masked data on, remove the original geo data and rename the variables  
   got <- left_join(got_map, df_mer) %>%
@@ -64,7 +65,7 @@
 
 #identify the number of mechanisms create masked ones and bind back on, replacing the originals
   primepartner <- distinct(got, primepartner)
-  got_pp <- read_csv(file.path(folderpath, "got_primepartner.csv"))
+  got_pp <- read_csv(here("Input", "got_primepartner.csv"))
   got_pp <- got_pp %>% 
     sample_n(nrow(primepartner))
   primepartner <- bind_cols(primepartner, got_pp)
@@ -79,6 +80,14 @@
 #adjust values, 60% of value & rounding to the nearest 10
   got <- got %>% mutate_if(is.numeric, ~ 10*ceiling((.*0.60)/10))
 
+#remove zeros
+  got <- got %>% mutate_if(is.numeric, ~ ifelse(. == 0, NA, .))
+  
+#convert back to uppercase names
+  headr <- names(read_tsv("~/ICPI/Data/ICPI_FactView_PSNU_IM_20180215_v1_3.txt", n_max = 0))
+  names(got) = headr
+    rm(headr)
+  
 #export
-  write_tsv(got, file.path(folderpath, "ICPI_FactView_PSNU_IM_20180215_v1_3_TRAINING.txt"))
-                            
+  write_tsv(got, "ICPI_FactView_TRAINING_PSNU_IM_20180215_v1_3.txt", na = "")
+  rm(got, df_mer)                          
