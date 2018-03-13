@@ -56,7 +56,8 @@
   
 #identify the number of mechanisms create masked ones and bind back on, replacing the originals
   mechs <- distinct(got, mechanismid) %>% 
-    mutate(mechanismid_new = row_number() + 80000)
+    mutate(mechanismid_new = row_number() + 80000,
+           mechanismid_new = as.character(mechanismid_new))
   got <- full_join(got, mechs)
     rm(mechs)
   got <- got %>% 
