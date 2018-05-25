@@ -92,6 +92,6 @@
     rm(headr)
   
 #export
-  write_tsv(got, "ICPI_MER_Structured_TRAINING_Dataset_PSNU_IM_FY17-18_20180515_v1_1.txt", na = "")
+  write_tsv(got, "Output/ICPI_MER_Structured_TRAINING_Dataset_PSNU_IM_FY17-18_20180515_v1_1.txt", na = "")
   rm(got, df_mer)                          
   
