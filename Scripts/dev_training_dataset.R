@@ -1,8 +1,8 @@
 ##   Training Dataset
 ##   Aaron Chafetz
 ##   Purpose: create a training dataset for public/non-identifiable use
-##   Date: 2018.03.13
-##   Updated: 
+##   Date: 2018-03-13
+##   Updated: 2018-05-25
 
 # NOTES:
 #  - user must input folderpath where files are stored locally
@@ -19,8 +19,10 @@
   got_geo <- read_csv(here("Input", "got_geo.csv")) 
 
 #import fact view
-  df_mer <- read_rds(Sys.glob("~/ICPI/Data/ICPI_FactView_PSNU_IM_*.Rds"))
-
+  df_mer <- read_rds(Sys.glob("~/ICPI/Data/ICPI_MER_Structured_Dataset_PSNU_IM_*.Rds"))
+  
+#save headers for later
+  
 #inspect unique psnus and mechids
   # df_mer %>% 
   #   group_by(operatingunit) %>% 
@@ -32,9 +34,9 @@
   #no dedups or mil, must have either FY17 or FY18 data, drop any line with missing values
   cohort <- df_mer %>% 
     filter(is.na(typemilitary), mechanismid > 1) %>% 
-    select(region:implementingmechanismname, fy2017apr, fy2018q1) %>% 
+    select(region:implementingmechanismname, fy2017apr, fy2018q2) %>% 
     drop_na(region:psnuuid, mechanismid:implementingmechanismname) %>% 
-    select(-fy2017apr, -fy2018q1) %>% 
+    select(-fy2017apr, -fy2018q2) %>% 
     distinct() %>% 
     sample_n(nrow(got_geo))
 
@@ -85,10 +87,11 @@
   got <- got %>% mutate_if(is.numeric, ~ ifelse(. == 0, NA, .))
   
 #convert back to uppercase names
-  headr <- names(read_tsv("~/ICPI/Data/ICPI_FactView_PSNU_IM_20180215_v1_3.txt", n_max = 0))
+  headr <- names(read_tsv("~/ICPI/Data/ICPI_MER_Structured_Dataset_PSNU_IM_FY17-18_20180515_v1_1.txt", n_max = 0))
   names(got) = headr
     rm(headr)
   
 #export
-  write_tsv(got, "ICPI_FactView_TRAINING_PSNU_IM_20180215_v1_3.txt", na = "")
+  write_tsv(got, "ICPI_MER_Structured_TRAINING_Dataset_PSNU_IM_FY17-18_20180515_v1_1.txt", na = "")
   rm(got, df_mer)                          
+  
