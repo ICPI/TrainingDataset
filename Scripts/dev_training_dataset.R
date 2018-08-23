@@ -18,7 +18,7 @@ gen_training <- function(msd_folderpath){
                         col_types = readr::cols(.default = "c")) 
   
   #import fact view
-    df_mer <- readr::read_rds(Sys.glob(file.path(msd_folderpath, "MER_Structured_Dataset_PSNU_IM_*.Rds")))
+    df_mer <- readr::read_rds(Sys.glob(file.path(msd_folderpath, "MER_Structured_Dataset_PSNU_IM_FY17*.Rds")))
   
   #randomly select a ~25 psnus
     #identify current period and prior fy apr
@@ -84,7 +84,7 @@ gen_training <- function(msd_folderpath){
     got <- got %>% dplyr::mutate_if(is.numeric, ~ ifelse(. == 0, NA, .))
     
   #convert back to uppercase names
-    headr <- readr::read_tsv(Sys.glob(file.path(msd_folderpath, "MER_Structured_Dataset_PSNU_IM_*.txt")), 
+    headr <- readr::read_tsv(Sys.glob(file.path(msd_folderpath, "MER_Structured_Dataset_PSNU_IM_FY17*.txt")), 
                       col_types = readr::cols(.default = "c"),
                       n_max = 0) %>%
       names()
@@ -93,6 +93,6 @@ gen_training <- function(msd_folderpath){
       rm(headr)
     
   #export
-    readr::write_tsv(got, "Output/MER_Structured_TRAINING_Dataset_PSNU_IM_FY17-18_20180622_v2_1.txt", na = "")
+    readr::write_tsv(got, "Output/MER_Structured_TRAINING_Dataset_PSNU_IM_FY17-18_20180815_v1_1.txt", na = "")
     rm(got, df_mer)                          
 }
