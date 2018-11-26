@@ -18,7 +18,7 @@ gen_training <- function(msd_folderpath){
                         col_types = readr::cols(.default = "c")) 
   
   #import fact view
-    df_mer <- readr::read_rds(Sys.glob(file.path(msd_folderpath, "MER_Structured_Dataset_PSNU_IM_FY17*.Rds")))
+    df_mer <- readr::read_rds(Sys.glob(file.path(msd_folderpath, "MER_Structured_Dataset_PSNU_IM_FY17*.rds")))
   
   #randomly select a ~25 psnus
     #identify current period and prior fy apr
@@ -27,7 +27,7 @@ gen_training <- function(msd_folderpath){
     
     #no dedups or mil, must have either FY17 or FY18 data, drop any line with missing values
     cohort <- df_mer %>% 
-      dplyr::filter(is.na(typemilitary), mechanismid > 1) %>% 
+      dplyr::filter(typemilitary == "N", mechanismid > 1) %>% 
       dplyr::select(region:implementingmechanismname, prior_apr, curr_pd) %>% 
       dplyr::mutate_at(dplyr::vars(prior_apr, curr_pd), ~ ifelse(. == 0, NA, .)) %>% 
       tidyr::drop_na(region:psnuuid, mechanismid:implementingmechanismname, prior_apr, curr_pd) %>% 
