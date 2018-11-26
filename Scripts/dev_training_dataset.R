@@ -93,6 +93,6 @@ gen_training <- function(msd_folderpath){
       rm(headr)
     
   #export
-    readr::write_tsv(got, "Output/MER_Structured_TRAINING_Dataset_PSNU_IM_FY17-18_20180815_v1_1.txt", na = "")
+    readr::write_tsv(got, "Output/MER_Structured_TRAINING_Dataset_PSNU_IM_FY17-18_20181115_v1_1.txt", na = "")
     rm(got, df_mer)                          
 }
