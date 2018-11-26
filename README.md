@@ -11,7 +11,7 @@ You can read the dataset directly into R by using the comands below. You must ha
   
 #import training dataset directly into R
   #dataset location
-  dataset_url <- "https://raw.githubusercontent.com/ICPI/TrainingDataset/master/Output/MER_Structured_TRAINING_Dataset_PSNU_IM_FY17-18_20180815_v1_1.txt"
+  dataset_url <- "https://raw.githubusercontent.com/ICPI/TrainingDataset/master/Output/MER_Structured_TRAINING_Dataset_PSNU_IM_FY17-18_20181115_v1_1.txt"
   
   #import with reader (will get some errors)
   df <- readr::read_tsv(dataset_url)
