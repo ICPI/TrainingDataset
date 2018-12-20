@@ -3,6 +3,13 @@ Create a masked training dataset to use for public facing work
 
 You can read the dataset directly into R by using the comands below. You must have the `readr` or `ICPIutilities` package installed.
 
+### NOTES
+
+- user must supply filepath for local PSNUxIM MSD
+- requires having MSD (.txt) stored locally
+- requires having planets_psnuuids2map.csv saved in Input which identifies the actual PSNUs that will be masked
+
+
 ```
 #install packages
   install.packages("readr")
