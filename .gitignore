@@ -4,4 +4,4 @@
 .Ruserdata
 got_map.csv
 
-data/planets_psnuuids2map.csv
+data-raw/planets_psnuuids2map.csv
