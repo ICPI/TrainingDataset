@@ -1,6 +1,7 @@
 #' Mask MSD, aka Training Dataset
 #'
 #' @param msd_filepath full file path to the MSD (PSNUxIM) (.txt)
+#' @param ... PSNUS to select (15) 
 #'
 #' @export
 #' @importFrom magrittr %>%
@@ -13,7 +14,7 @@
 #'     gen_training_planets(msd_filepath) 
 #'   }
 
-mask_msd <- function(msd_filepath){
+mask_msd <- function(msd_filepath, ...){
   
   #set seed for sampling to ensure same order ever time
     set.seed(14)
