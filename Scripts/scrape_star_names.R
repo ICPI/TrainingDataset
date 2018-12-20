@@ -17,7 +17,7 @@ get_names <- function(url){
   df <- wikitable %>% 
     purrr::pluck(data.frame) %>% 
     tibble::as_tibble() %>% 
-    dplyr::select(contellation = Constellation, star_name = Modern.proper.name) %>% 
+    dplyr::select(constellation = Constellation, star_name = Modern.proper.name) %>% 
     dplyr::mutate(star_name = stringr::str_remove_all(star_name, "[citation needed]|†")) %>% 
     dplyr::filter(star_name != "-")
 }

@@ -71,7 +71,7 @@ gen_training_planets <- function(msd_filepath){
   #add masked partner & mechanism names
     partners <- readr::read_csv("Input/planets_primepartners.csv",
                                 col_types = readr::cols(.default = "c")) %>% 
-      dplyr::rename(primepartner_mw = contellation,
+      dplyr::rename(primepartner_mw = constellation,
                     implementingmechanismname_mw = star_name) %>% 
       dplyr::sample_n(nrow(mechs)) %>% #sample primeparter and mech names from list
       dplyr::bind_cols(new_mechs, .) #bind onto mechanism list
