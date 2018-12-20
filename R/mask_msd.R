@@ -1,26 +1,19 @@
-##   Training Dataset
-##   Aaron Chafetz
-##   Purpose: create a training dataset for public/non-identifiable use
-##   Date: 2018-12-19
-##   Updated: 
+#' Mask MSD, aka Training Dataset
+#'
+#' @param msd_filepath full file path to the MSD (PSNUxIM) (.txt)
+#'
+#' @export
+#' @importFrom magrittr %>%
+#'
+#' @examples
+#'  \dontrun{
+#'   #filepath for MSD (.txt)
+#'     msd_filepath <- "~/ICPI/Data/MER_Structured_Dataset_PSNU_IM_FY17-18_20181115_v1_2.txt"
+#'   #genreate training dataset
+#'     gen_training_planets(msd_filepath) 
+#'   }
 
-
-# NOTES -------------------------------------------------------------------
-
-#  - user must supply filepath for local PSNUxIM MSD
-#  - requires having MSD (.txt) stored locally
-#  - requires having planets_psnuuids2map.csv saved in Input which identifies the actual PSNUs that will be masked
-
-
-# DEPENDENCIES ------------------------------------------------------------
-
-library(magrittr)
-
-
-# FUNCTION ----------------------------------------------------------------
-
-
-gen_training_planets <- function(msd_filepath){
+mask_msd <- function(msd_filepath){
   
   #set seed for sampling to ensure same order ever time
     set.seed(14)
@@ -111,10 +104,4 @@ gen_training_planets <- function(msd_filepath){
 } 
 
 
-# GENERATE TRAINING DATASET -----------------------------------------------
 
-#filepath for MSD (.txt)
-  msd_filepath <- "~/ICPI/Data/MER_Structured_Dataset_PSNU_IM_FY17-18_20181115_v1_2.txt"
-
-#genreate training dataset
-  gen_training_planets(msd_filepath)
