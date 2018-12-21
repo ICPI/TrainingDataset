@@ -1,12 +1,12 @@
 Package: TrainingDataset
-Title: Create a Masked MER Structured Dataset
+Title: TrainingDataset
 Version: 0.0.0.9000
 Authors@R: 
     person(given = "Aaron",
            family = "Chafetz",
            role = c("aut", "cre"),
            email = "achafetz@usaid.gov")
-Description: What the package does (one paragraph).
+Description: Create a Masked MER Structured Dataset
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
