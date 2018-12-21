@@ -4,10 +4,12 @@
 \alias{mask_msd}
 \title{Mask MSD, aka Training Dataset}
 \usage{
-mask_msd(msd_filepath)
+mask_msd(msd_filepath, ...)
 }
 \arguments{
 \item{msd_filepath}{full file path to the MSD (PSNUxIM) (.txt)}
+
+\item{...}{PSNUS to select (15)}
 }
 \description{
 Mask MSD, aka Training Dataset
