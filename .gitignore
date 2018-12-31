@@ -2,6 +2,6 @@
 .Rhistory
 .RData
 .Ruserdata
-got_map.csv
 
-data-raw/planets_psnuuids2map.csv
+#ignore actual mapping of PSNUs to planet mask
+*/psnu_lst.*
