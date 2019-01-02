@@ -1,7 +1,7 @@
 #' Mask MSD, aka Training Dataset
 #'
 #' @param msd_filepath full file path to the MSD (PSNUxIM) (.txt)
-#' @param ... PSNUS to select (15) 
+#' @param psnuuids list of PSNU UIDs to select (n must equal 15) 
 #'
 #' @export
 #' @importFrom magrittr %>%
@@ -14,14 +14,11 @@
 #'     gen_training_planets(msd_filepath) 
 #'   }
 
-mask_msd <- function(msd_filepath, ...){
-  
-  #store PSNU UIDS
-    psnus <- list(...)
-  
+mask_msd <- function(msd_filepath, psnuuids){
+
   #exit if 15 PSNU UIDS are not supplied
-    if(length(psnus) == 0)   stop("No PSNU UID list supplied")
-    #if(length(psnus) != 15)  stop("Must supply 15 PSNU UIDs.")
+    if(length(psnuuids) == 0)   stop("No PSNU UID list supplied")
+    if(length(psnuuids) != 15)  stop("Must supply 15 PSNU UIDs.")
   
   #set seed for sampling to ensure same order ever time
     set.seed(14)
@@ -29,7 +26,7 @@ mask_msd <- function(msd_filepath, ...){
   #change geography data to lower & bind LIST of real PSNUs onto new/masked geography DATA FRAME
     df_mapping <- planets_geo %>% 
       dplyr::rename_all(tolower) %>% 
-      dplyr::bind_cols(psnuuid = psnus, .)
+      dplyr::bind_cols(psnuuid = psnuuids, .)
     
   #import MSD
     df_mer <- ICPIutilities::read_msd(msd_filepath, to_lower = FALSE)
