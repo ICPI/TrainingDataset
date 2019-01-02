@@ -18,7 +18,11 @@ Mask MSD, aka Training Dataset
  \dontrun{
   #filepath for MSD (.txt)
     msd_filepath <- "~/ICPI/Data/MER_Structured_Dataset_PSNU_IM_FY17-18_20181115_v1_2.txt"
-  #genreate training dataset
-    gen_training_planets(msd_filepath) 
+  #supply list of PSNU uids to use
+    psnuuid_list <- c("QlWUt1rBsEo", "GfzVv4oeclF", "PNgOI7VPe98", "TWpkDEvK6si", "aqktQTp0wHa", 
+                      "XFdvhW8Ga1S", "sVwvt4bYesp", "EJDcY4F1rsj", "nXEQ97b2YHJ", "DfXQBOLWwbZ", 
+                      "aC69ENcI2hU", "PJpAerXQjZ7", "PAj75tgxkIU", "Wru5kJQ36GT", "HB75Phs4wZL")
+  #generate training dataset
+    gen_training_planets(msd_filepath, psnuuid_list) 
   }
 }
