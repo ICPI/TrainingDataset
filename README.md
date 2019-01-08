@@ -1,16 +1,12 @@
 # TrainingDataset
+
 Create a masked training dataset to use for public facing work
 
 You can read the dataset directly into R by using the comands below. You must have the `readr` or `ICPIutilities` package installed.
 
-### NOTES
-
-- user must supply filepath for local PSNUxIM MSD
-- requires having MSD (.txt) stored locally
-- requires having planets_psnuuids2map.csv saved in Input which identifies the actual PSNUs that will be masked
-
-
 ```
+## IMPORT MASKED TRAINING DATASET
+
 #install packages
   install.packages("readr")
   install.packages("devtools")
@@ -26,4 +22,30 @@ You can read the dataset directly into R by using the comands below. You must ha
   #alternatively, you can use the read_msd() function from ICPIutilities (reads in all columns correctly)
   df <- ICPIutilities::read_msd(dataset_url, save_rds = FALSE)
 
+```
+
+Users also have the options of building a masked dataset. To do so requires ther users to have (1) the current PEPFAR MSD PSNUxIM and (2) supply a list of 15 PSNU UIDS. These PSNU UIDS will be used to filter the dataset to keep only those districts identified. For the list used to produce the official MSD Training dataset, you can contact ICPI/DIV.
+
+```
+## BUILD MASKED TRAINING DATASET
+
+  #install packages
+    install.packages("devtools")
+    devtools::install_github("ICPI/ICPIutilities")
+  
+  #filepath for MSD (.txt)
+    msd_filepath <- "~/ICPI/Data/MER_Structured_Dataset_PSNU_IM_FY17-18_20181115_v1_2.txt"
+    
+  #supply list of PSNU UIDs to use 
+    #these are dummy PSNU UIDs; user must change
+    #to get the list used quarterly, contact ICPI/DIV
+    psnuuid_list <- c("QlWUt1rBsEo", "GfzVv4oeclF", "PNgOI7VPe98", "TWpkDEvK6si", "aqktQTp0wHa", 
+                      "XFdvhW8Ga1S", "sVwvt4bYesp", "EJDcY4F1rsj", "nXEQ97b2YHJ", "DfXQBOLWwbZ", 
+                      "aC69ENcI2hU", "PJpAerXQjZ7", "PAj75tgxkIU", "Wru5kJQ36GT", "HB75Phs4wZL")
+                      
+  #generate training dataset
+    mask_msd(msd_filepath, psnuuid_list) 
+    
+  #alternatively, save to a training dataset to a different folder than the MSD folder
+    mask_msd(msd_filepath, psnuuid_list, "~/Output") 
 ```
