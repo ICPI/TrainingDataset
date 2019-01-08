@@ -4,12 +4,14 @@
 \alias{mask_msd}
 \title{Mask MSD, aka Training Dataset}
 \usage{
-mask_msd(msd_filepath, psnuuids)
+mask_msd(msd_filepath, psnuuids, output_folderpath = NULL)
 }
 \arguments{
 \item{msd_filepath}{full file path to the MSD (PSNUxIM) (.txt)}
 
 \item{psnuuids}{list of PSNU UIDs to select (n must equal 15)}
+
+\item{output_folderpath}{full folder folder path to where you want to save to (default = NULL, ie `msd_filepath` folder)}
 }
 \description{
 Mask MSD, aka Training Dataset
@@ -23,6 +25,8 @@ Mask MSD, aka Training Dataset
                       "XFdvhW8Ga1S", "sVwvt4bYesp", "EJDcY4F1rsj", "nXEQ97b2YHJ", "DfXQBOLWwbZ", 
                       "aC69ENcI2hU", "PJpAerXQjZ7", "PAj75tgxkIU", "Wru5kJQ36GT", "HB75Phs4wZL")
   #generate training dataset
-    gen_training_planets(msd_filepath, psnuuid_list) 
+    mask_msd(msd_filepath, psnuuid_list) 
+  #save to a training dataset to a different folder than the MSD folder
+    mask_msd(msd_filepath, psnuuid_list, "~/Output") 
   }
 }

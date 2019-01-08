@@ -2,6 +2,7 @@
 #'
 #' @param msd_filepath full file path to the MSD (PSNUxIM) (.txt)
 #' @param psnuuids list of PSNU UIDs to select (n must equal 15) 
+#' @param output_folderpath full folder folder path to where you want to save to (default = NULL, ie `msd_filepath` folder)
 #'
 #' @export
 #' @importFrom magrittr %>%
@@ -15,10 +16,12 @@
 #'                       "XFdvhW8Ga1S", "sVwvt4bYesp", "EJDcY4F1rsj", "nXEQ97b2YHJ", "DfXQBOLWwbZ", 
 #'                       "aC69ENcI2hU", "PJpAerXQjZ7", "PAj75tgxkIU", "Wru5kJQ36GT", "HB75Phs4wZL")
 #'   #generate training dataset
-#'     gen_training_planets(msd_filepath, psnuuid_list) 
+#'     mask_msd(msd_filepath, psnuuid_list) 
+#'   #save to a training dataset to a different folder than the MSD folder
+#'     mask_msd(msd_filepath, psnuuid_list, "~/Output") 
 #'   }
 
-mask_msd <- function(msd_filepath, psnuuids){
+mask_msd <- function(msd_filepath, psnuuids, output_folderpath = NULL){
 
   #exit if 15 PSNU UIDS are not supplied
     if(length(psnuuids) == 0)   stop("No PSNU UID list supplied")
@@ -97,11 +100,17 @@ mask_msd <- function(msd_filepath, psnuuids){
     names(df_mw) <- headr
   
   #export
-    msd_filepath <- msd_filepath %>% 
+    output_filename <- msd_filepath %>% 
       basename() %>% 
       stringr::str_replace("MER_Structured_Dataset", "MER_Structured_TRAINING_Dataset") 
-      
-    readr::write_tsv(df_mw, file.path("Output/", msd_filepath), na = "")
+    
+    if(is.null(output_folderpath)) {
+      output_folderpath <- file.path(dirname(msd_filepath), output_filename)
+    } else {
+      output_folderpath <- file.path(output_folderpath, output_filename)
+    }
+    
+    readr::write_tsv(df_mw, output_folderpath, na = "")
 } 
 
 
