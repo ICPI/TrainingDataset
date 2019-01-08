@@ -74,6 +74,9 @@ mask_msd <- function(msd_filepath, psnuuids){
   #bind mechanism info onto dataset
     df_mw <- dplyr::left_join(df_mw, partners, by = "mechanismid")
   
+  #adjust site level if applicable
+    df_mw <- mask_sites(df_mw)
+    
   #remove the original hiearchy/partner data and rename the variables and reorder 
     lst_unmaskedvar <- df_mw %>% 
       dplyr::select(dplyr::ends_with("_mw")) %>% 
