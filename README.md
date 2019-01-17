@@ -26,7 +26,7 @@ To use with R, you must have the `readr` and `ICPIutilities` package installed.
 
 ```
 
-Users also have the options of building a masked dataset. To do so requires ther users to have (1) the current PEPFAR MSD PSNUxIM and (2) supply a list of 15 PSNU UIDS. These PSNU UIDS will be used to filter the dataset to keep only those districts identified. For the list used to produce the official MSD Training dataset, you can contact ICPI/DIV.
+Users also have the options of building a masked dataset. To do so requires the users to have (1) the current PEPFAR MSD PSNUxIM and (2) supply a list of 15 PSNU UIDS. These PSNU UIDS will be used to filter the dataset to keep only those districts identified. For the list used to produce the official MSD Training dataset, you can contact ICPI/DIV.
 
 ```
 ## BUILD MASKED TRAINING DATASET
