@@ -1,8 +1,8 @@
 # PEPFAR MSD Training Dataset
 
-This reposititory houses the PEPFAR MSD-stle training dataset to use for testing andx public facing work.
+This repository houses the PEPFAR MSD-style training dataset to use for testing and public facing work. This is a dummy dataset that should be used for testing, training, and demoing instead of using actual data.
 
-You can [download the dataset](https://github.com/ICPI/TrainingDataset/raw/master/Output/MER_Structured_TRAINING_Dataset_PSNU_IM_FY17-18_20181221_v2_1.txt) or read the dataset directly into R by using the comands below. 
+You can [download the dataset](https://github.com/ICPI/TrainingDataset/raw/master/Output/MER_Structured_TRAINING_Dataset_PSNU_IM_FY17-18_20181221_v2_1.txt) or read the dataset directly into R by using the commands below. 
 
 To use with R, you must have the `readr` and `ICPIutilities` package installed.
 
@@ -26,7 +26,7 @@ To use with R, you must have the `readr` and `ICPIutilities` package installed.
 
 ```
 
-Users also have the options of building a masked dataset. To do so requires ther users to have (1) the current PEPFAR MSD PSNUxIM and (2) supply a list of 15 PSNU UIDS. These PSNU UIDS will be used to filter the dataset to keep only those districts identified. For the list used to produce the official MSD Training dataset, you can contact ICPI/DIV.
+Users also have the options of building a masked dataset. To do so requires the users to have (1) the current PEPFAR MSD PSNUxIM and (2) supply a list of 15 PSNU UIDS. These PSNU UIDS will be used to filter the dataset to keep only those districts identified. For the list used to produce the official MSD Training dataset, you can contact ICPI/DIV.
 
 ```
 ## BUILD MASKED TRAINING DATASET
