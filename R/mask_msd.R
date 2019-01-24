@@ -96,7 +96,7 @@ mask_msd <- function(msd_filepath, psnuuids, output_folderpath = NULL){
       dplyr::mutate_if(is.numeric, ~ ifelse(. == 0, NA, .))
 
   #remove row with no data
-    df_mw <-filter_at(df_mw, vars(starts_with("fy")), all_vars(!is.na(.)))
+    df_mw <- dplyr::filter_at(df_mw, dplyr::vars(dplyr::starts_with("fy")), dplyr::any_vars(!is.na(.)))
     
   #convert back to uppercase names
     names(df_mw) <- headr
