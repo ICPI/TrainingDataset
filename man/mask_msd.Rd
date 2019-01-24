@@ -9,7 +9,7 @@ mask_msd(msd_filepath, psnuuids, output_folderpath = NULL)
 \arguments{
 \item{msd_filepath}{full file path to the MSD (PSNUxIM) (.txt)}
 
-\item{psnuuids}{list of PSNU UIDs to select (n must equal 15)}
+\item{psnuuids}{list of PSNU UIDs to select (n must equal 9)}
 
 \item{output_folderpath}{full folder folder path to where you want to save to (default = NULL, ie `msd_filepath` folder)}
 }
@@ -20,10 +20,9 @@ Mask MSD, aka Training Dataset
  \dontrun{
   #filepath for MSD (.txt)
     msd_filepath <- "~/ICPI/Data/MER_Structured_Dataset_PSNU_IM_FY17-18_20181115_v1_2.txt"
-  #supply list of PSNU uids to use
+  #supply list of PSNU uids to use (must be 9)
     psnuuid_list <- c("QlWUt1rBsEo", "GfzVv4oeclF", "PNgOI7VPe98", "TWpkDEvK6si", "aqktQTp0wHa", 
-                      "XFdvhW8Ga1S", "sVwvt4bYesp", "EJDcY4F1rsj", "nXEQ97b2YHJ", "DfXQBOLWwbZ", 
-                      "aC69ENcI2hU", "PJpAerXQjZ7", "PAj75tgxkIU", "Wru5kJQ36GT", "HB75Phs4wZL")
+                      "XFdvhW8Ga1S", "sVwvt4bYesp", "EJDcY4F1rsj", "nXEQ97b2YHJ")
   #generate training dataset
     mask_msd(msd_filepath, psnuuid_list) 
   #save to a training dataset to a different folder than the MSD folder

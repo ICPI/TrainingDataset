@@ -1,12 +1,12 @@
 #' Geography for the Masked Dataset
 #' 
 #' A dataset containing MER Structured Dataset
-#' hieararchy for 15 Priority Sub Natioaal Units (PSNUs).
+#' hieararchy for 9 Priority Sub National Units (PSNUs).
 #' All data have an underscore of _mw to designate they 
 #' fall in the Milky Way (they duplicate the columns
 #' in the MSD they will replace).
 #' 
-#' @format A dataframe with 15 rows and 9 variables:
+#' @format A dataframe with 9 rows and 9 variables:
 #' \describe{
 #'   \item{Region_mw}{hieararchy one level below global}
 #'   \item{RegionUID_mw}{the unique ID for Region}
@@ -19,5 +19,5 @@
 #'   \item{PSNUuid_mw}{unique ID for the PSNU}
 #' }
 #' 
-#' @source Put together by Abe Agedew (CDC/ICPI)
+#' @source Initial developed by Abe Agedew (CDC/ICPI); adjustments by Aaron Chafetz (USAID/ICPI)
 "planets_geo"
