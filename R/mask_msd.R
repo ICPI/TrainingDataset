@@ -54,27 +54,27 @@ mask_msd <- function(msd_filepath, psnuuids, output_folderpath = NULL){
   
   #identify the number of mechanisms create masked ones and bind back on, replacing the originals
     mechs <- df_mw %>% 
-      dplyr::distinct(mechanismid) %>% 
-      dplyr::arrange(mechanismid)
+      dplyr::distinct(mech_code) %>% 
+      dplyr::arrange(mech_code)
   
     new_mechs <- seq(1200, 1800,1) %>% #mechanism id can fall between 1200 and 1800
       sample(nrow(mechs)) %>% #sample n number of mech ids based on n of mechanisms
       as.character(.) %>% 
-      dplyr::bind_cols(mechs, mechanismid_mw = .) %>% #combine masked id with dedup
-      dplyr::mutate(mechanismid_mw = ifelse(mechanismid %in% c("00000", "00001"), 
-                                            stringr::str_replace(mechanismid, "0000", "000"),
-                                            mechanismid_mw),
-                    mechanismid_mw = paste0("0", mechanismid_mw)) 
+      dplyr::bind_cols(mechs, mech_code_mw = .) %>% #combine masked id with dedup
+      dplyr::mutate(mech_code_mw = ifelse(mech_code %in% c("00000", "00001"), 
+                                            stringr::str_replace(mech_code, "0000", "000"),
+                                            mech_code_mw),
+                    mech_code_mw = paste0("0", mech_code_mw)) 
   
   #add masked partner & mechanism names
     partners <- planets_primepartners %>% 
-      dplyr::sample_n(nrow(mechs)) %>% #sample primeparter and mech names from list
+      dplyr::sample_n(nrow(mechs), replace = TRUE) %>% #sample primeparter and mech names from list
       dplyr::bind_cols(new_mechs, .) %>% #bind onto mechanism list
-      dplyr::mutate(primepartner_mw = ifelse(mechanismid %in% c("00000", "00001"), "Dedup", primepartner_mw),
-                    implementingmechanismname_mw = ifelse(mechanismid %in% c("00000", "00001"), "Dedup", implementingmechanismname_mw))
+      dplyr::mutate(primepartner_mw = ifelse(mech_code %in% c("00000", "00001"), "Dedup", primepartner_mw),
+                    mech_name_mw = ifelse(mech_code %in% c("00000", "00001"), "Dedup", mech_name_mw))
 
   #bind mechanism info onto dataset
-    df_mw <- dplyr::left_join(df_mw, partners, by = "mechanismid")
+    df_mw <- dplyr::left_join(df_mw, partners, by = "mech_code")
   
   #adjust site level if applicable
     df_mw <- mask_sites(df_mw)
@@ -92,11 +92,11 @@ mask_msd <- function(msd_filepath, psnuuids, output_folderpath = NULL){
   
   #adjust values, 60% of value & rounding to the nearest 10 and then remove zeros
     df_mw <- df_mw %>% 
-      dplyr::mutate_if(is.numeric, ~ 10*ceiling((.*0.60)/10)) %>% 
-      dplyr::mutate_if(is.numeric, ~ ifelse(. == 0, NA, .))
+      dplyr::mutate_if(is.double, ~ 10*ceiling((.*0.60)/10)) %>% 
+      dplyr::mutate_if(is.double, ~ ifelse(. == 0, NA, .))
 
   #remove row with no data
-    df_mw <- dplyr::filter_at(df_mw, dplyr::vars(dplyr::starts_with("fy")), dplyr::any_vars(!is.na(.)))
+    df_mw <- dplyr::filter_at(df_mw, dplyr::vars(cumulative, targets), dplyr::any_vars(!is.na(.)))
     
   #convert back to uppercase names
     names(df_mw) <- headr
