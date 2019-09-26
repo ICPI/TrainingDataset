@@ -9,7 +9,7 @@
     dplyr::mutate(star_name = stringr::str_remove_all(star_name, "[citation needed]|†")) %>% 
     dplyr::filter(star_name != "-") %>% 
     dplyr::rename(primepartner_mw = constellation,
-                  implementingmechanismname_mw = star_name)
+                  mech_name_mw = star_name)
 
 #save
   readr::write_csv(planets_primepartners, "data-raw/planets_primepartners.csv")
