@@ -1,4 +1,4 @@
-Region_mw,RegionUID_mw,OperatingUnit_mw,OperatingUnitUID_mw,CountryName_mw,SNU1_mw,SNU1Uid_mw,PSNU_mw,PSNUuid_mw
+region_mw,regionuid_mw,operatingunit_mw,operatingunituid_mw,countryname_mw,snu1_mw,snu1uid_mw,psnu_mw,psnuuid_mw
 Milky Way,JCDsa4GxW5q,Saturn,wRhSdzNT5Gl,Outer Ring,Outer Ring I,xdCvIVnbQ8x,Mimas,bcHIEhBiFDz
 Milky Way,JCDsa4GxW5q,Saturn,wRhSdzNT5Gl,Outer Ring,Outer Ring II,foYAIOUJEgm,Dione,nqa03O1goVF
 Milky Way,JCDsa4GxW5q,Saturn,wRhSdzNT5Gl,Inner Ring,Inner Ring I,onqh9NxXw3g,Thea,gVPlqKRZDdh

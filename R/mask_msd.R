@@ -1,6 +1,6 @@
 #' Mask MSD, aka Training Dataset
 #'
-#' @param msd_filepath full file path to the MSD (PSNUxIM) (.txt)
+#' @param msd_filepath full file path to the MSD (PSNUxIM) (.rds)
 #' @param psnuuids list of PSNU UIDs to select (n must equal 9) 
 #' @param output_folderpath full folder folder path to where you want to save to (default = NULL, ie `msd_filepath` folder)
 #'
@@ -9,8 +9,8 @@
 #'
 #' @examples
 #'  \dontrun{
-#'   #filepath for MSD (.txt)
-#'     msd_filepath <- "~/ICPI/Data/MER_Structured_Dataset_PSNU_IM_FY17-18_20181115_v1_2.txt"
+#'   #filepath for MSD (.rds)
+#'     msd_filepath <- "~/ICPI/Data/MER_Structured_Dataset_PSNU_IM_FY17-18_20181115_v1_2.rds"
 #'   #supply list of PSNU uids to use (must be 9)
 #'     psnuuid_list <- c("QlWUt1rBsEo", "GfzVv4oeclF", "PNgOI7VPe98", "TWpkDEvK6si", "aqktQTp0wHa", 
 #'                       "XFdvhW8Ga1S", "sVwvt4bYesp", "EJDcY4F1rsj", "nXEQ97b2YHJ")
@@ -29,20 +29,15 @@ mask_msd <- function(msd_filepath, psnuuids, output_folderpath = NULL){
   #set seed for sampling to ensure same order ever time
     set.seed(14)
     
-  #change geography data to lower & bind LIST of real PSNUs onto new/masked geography DATA FRAME
-    df_mapping <- planets_geo %>% 
-      dplyr::rename_all(tolower) %>% 
-      dplyr::bind_cols(psnuuid = psnuuids, .)
-    
+  #change geography data & bind LIST of real PSNUs onto new/masked geography DATA FRAME
+    df_mapping <- dplyr::bind_cols(psnuuid = psnuuids, planets_geo)
+      
   #import MSD
-    df_mer <- ICPIutilities::read_msd(msd_filepath, to_lower = FALSE)
+    df_mer <- readr::read_rds(msd_filepath)
 
   #store upper & lower case headers for applying ordering and snake casing
-    headr <- names(df_mer)
-    order <- tolower(headr)
-    
-  #convert to lower for ease of use
-    df_mer <- dplyr::rename_all(df_mer, tolower)
+    #headr <- names(df_mer)
+    order <- names(df_mer)
     
   #keep data only from select PSNUs, bind the masked geography to the real
     df_mw <- dplyr::inner_join(df_mer, df_mapping, by = "psnuuid")
@@ -98,9 +93,6 @@ mask_msd <- function(msd_filepath, psnuuids, output_folderpath = NULL){
   #remove row with no data
     df_mw <- dplyr::filter_at(df_mw, dplyr::vars(cumulative, targets), dplyr::any_vars(!is.na(.)))
     
-  #convert back to uppercase names
-    names(df_mw) <- headr
-  
   #export
     output_filename <- msd_filepath %>% 
       basename() %>% 
