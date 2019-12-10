@@ -96,7 +96,8 @@ mask_msd <- function(msd_filepath, psnuuids, output_folderpath = NULL){
   #export
     output_filename <- msd_filepath %>% 
       basename() %>% 
-      stringr::str_replace("MER_Structured_Dataset", "MER_Structured_TRAINING_Dataset") 
+      stringr::str_replace("MER_Structured_Dataset", "MER_Structured_TRAINING_Dataset") %>% 
+      stringr::str_replace("rds", "txt")
     
     if(is.null(output_folderpath)) {
       output_folderpath <- file.path(dirname(msd_filepath), output_filename)
