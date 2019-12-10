@@ -16,7 +16,7 @@ To use with R, you must have the `readr` and `ICPIutilities` package installed.
   
 #import training dataset directly into R
   #dataset location
-  dataset_url <- "https://media.githubusercontent.com/media/ICPI/TrainingDataset/master/Output/MER_Structured_TRAINING_Datasets_PSNU_IM_FY17-19_20190815_v1_1.txt"
+  dataset_url <- "https://media.githubusercontent.com/media/ICPI/TrainingDataset/master/Output/MER_Structured_TRAINING_Datasets_PSNU_IM_FY17-20_20191115_v1_1.txt"
   
   #import with reader (will get some errors)
   df <- readr::read_tsv(dataset_url)
