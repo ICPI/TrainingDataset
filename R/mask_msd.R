@@ -35,8 +35,7 @@ mask_msd <- function(msd_filepath, psnuuids, output_folderpath = NULL){
   #import MSD
     df_mer <- readr::read_rds(msd_filepath)
 
-  #store upper & lower case headers for applying ordering and snake casing
-    #headr <- names(df_mer)
+  #store headers for applying ordering at end
     order <- names(df_mer)
     
   #keep data only from select PSNUs, bind the masked geography to the real
@@ -44,8 +43,10 @@ mask_msd <- function(msd_filepath, psnuuids, output_folderpath = NULL){
     
     rm(df_mer)
     
-  #remove the mech UID
-    df_mw <- dplyr::mutate(df_mw, mechanismuid  = as.character(NA))
+  #remove the mech identifiers
+    df_mw <- dplyr::mutate_at(df_mw, dplyr::vars(pre_rgnlztn_hq_mech_code,
+                                                 prime_partner_duns,
+                                                 award_number),  ~ as.character(NA))
   
   #identify the number of mechanisms create masked ones and bind back on, replacing the originals
     mechs <- df_mw %>% 
