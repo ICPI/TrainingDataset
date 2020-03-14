@@ -82,7 +82,7 @@ mask_msd <- function(msd_filepath, psnuuids, output_folderpath = NULL){
       stringr::str_remove("_mw")
     
     df_mw <- df_mw %>% 
-      dplyr::select(-lst_unmaskedvar) %>% 
+      dplyr::select(-all_of(lst_unmaskedvar)) %>% 
       dplyr::rename_all(~ stringr::str_remove(., "_mw")) %>% 
       dplyr::select(order)
   
