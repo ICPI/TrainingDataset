@@ -2,7 +2,7 @@
 
 This repository houses the PEPFAR MSD-style training dataset to use for testing and public facing work. This is a dummy dataset that should be used for testing, training, and demoing instead of using actual data.
 
-You can [download the dataset](https://github.com/ICPI/TrainingDataset/raw/master/Output/MER_Structured_TRAINING_Datasets_PSNU_IM_FY17-19_20190815_v1_1.txt) or read the dataset directly into R by using the commands below. 
+You can [download the dataset](https://media.githubusercontent.com/media/ICPI/TrainingDataset/master/Output/MER_Structured_TRAINING_Datasets_PSNU_IM_FY18-20_20200214_v1_1.txt) or read the dataset directly into R by using the commands below. 
 
 To use with R, you must have the `readr` and `ICPIutilities` package installed.
 
@@ -16,7 +16,7 @@ To use with R, you must have the `readr` and `ICPIutilities` package installed.
   
 #import training dataset directly into R
   #dataset location
-  dataset_url <- "https://media.githubusercontent.com/media/ICPI/TrainingDataset/master/Output/MER_Structured_TRAINING_Datasets_PSNU_IM_FY17-20_20191115_v1_1.txt"
+  dataset_url <- "https://media.githubusercontent.com/media/ICPI/TrainingDataset/master/Output/MER_Structured_TRAINING_Datasets_PSNU_IM_FY18-20_20200214_v1_1.txt"
   
   #import with reader (will get some errors)
   df <- readr::read_tsv(dataset_url)
